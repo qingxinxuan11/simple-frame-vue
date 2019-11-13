@@ -4,12 +4,22 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+// rem自适应
+import 'amfe-flexible'
+
+// vuex
+import store from './store'
+
+Vue.prototype.$store = store
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: {
+    App
+  },
   template: '<App/>'
 })

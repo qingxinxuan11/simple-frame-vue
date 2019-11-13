@@ -84,8 +84,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'HelloWorld',
+  computed: {
+    ...mapGetters('UserInfo', {
+      userInfo: 'getMembInfo'
+    })
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
@@ -96,7 +102,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {
