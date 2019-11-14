@@ -9,8 +9,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'User',
   data () {
-    return {
-    }
+    return {}
   },
   computed: {
     ...mapGetters('UserInfo', {
@@ -18,6 +17,17 @@ export default {
     })
   },
   created () {
+    this.$http
+      .get('api/v1/common/city/list', {
+        params: {
+          num: 1, // 页码
+          size: 8 // 每页长度
+        }
+      })
+      .then(response => {
+        console.log(response.body)
+      })
+      .then(e => {})
   }
 }
 </script>
@@ -27,8 +37,8 @@ export default {
   width: 10rem;
   height: 100%;
   span {
-      display: inline-block;
-      width: 6.666667rem;
+    display: inline-block;
+    width: 6.666667rem;
   }
 }
 </style>
