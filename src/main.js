@@ -10,6 +10,17 @@ import 'amfe-flexible'
 // vuex
 import store from './store'
 
+// 引入vue-resource用于接口请求
+import VueResource from 'vue-resource'
+
+// filters
+import '@/filters/filters'
+
+Vue.use(VueResource)
+
+// moment.js 以插件方式使用
+Vue.use(require('vue-moment'))
+
 Vue.prototype.$store = store
 
 Vue.config.productionTip = false

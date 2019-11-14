@@ -1,20 +1,23 @@
 <template>
   <div class="whole_container">
-    <span>lalalalala</span>
+    <span>this is user page</span>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  name: 'Home',
+  name: 'User',
+  data () {
+    return {
+    }
+  },
   computed: {
     ...mapGetters('UserInfo', {
       userInfo: 'getMembInfo'
     })
   },
   created () {
-    console.log(this.userInfo)
   }
 }
 </script>
