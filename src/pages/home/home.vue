@@ -4,22 +4,58 @@
     <span>{{time | filterExample}}</span>
     <span>{{time | moment('dddd, MMMM Do YYYY')}}</span>
     <span>{{time | moment('YYYY')}}</span>
+    <component-one :sendData="sendData"></component-one>
+    <component-two :sendData="sendData"></component-two>
+    <component-slot>
+      匿名传的
+    <template v-slot:haha>
+      <div>
+        this is haha slot
+      </div>
+    </template>
+    <!-- <template v-slot:scop="slotData">
+      <div>
+        {{slotData.num}}
+      </div>
+    </template> -->
+    <!-- 直接对象解构 -->
+    <template v-slot:scop="{num,word}">
+      <div>
+        {{num}}:{{word}}
+      </div>
+    </template>
+    </component-slot>
+    <form-test></form-test>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import ComponentOne from '../../components/componentOne'
+import ComponentTwo from '../../components/componentTwo'
+import ComponentSlot from '../../components/componentSlot'
+import FormTest from '../../components/form/index'
 export default {
   name: 'Home',
   data () {
     return {
-      time: '2019-11-14 09:56:45'
+      time: '2019-11-14 09:56:45',
+      sendData: 'This is father'
     }
+  },
+  provide: {
+    passAllData: 'toChildren'
   },
   computed: {
     ...mapGetters('UserInfo', {
       userInfo: 'getMembInfo'
     })
+  },
+  components: {
+    ComponentOne,
+    ComponentTwo,
+    ComponentSlot,
+    FormTest
   },
   created () {
     console.log(this.userInfo)
