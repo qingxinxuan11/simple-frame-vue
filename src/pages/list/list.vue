@@ -9,6 +9,7 @@
       :up="mescrollUp"
       @init="mescrollInit"
     >
+    <tree></tree>
     </mescroll-vue>
   </div>
 </template>
@@ -16,6 +17,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import MescrollVue from 'mescroll.js/mescroll.vue'
+import Tree from '../../components/tree/index'
 export default {
   name: 'List',
   data () {
@@ -43,7 +45,35 @@ export default {
           tip: '暂无相关数据~' // 提示
         }
       },
-      dataList: [] // 列表数据
+      dataList: [], // 列表数据
+      treeData: [
+        {
+          name: '学科',
+          id: 1,
+          children: [
+            {
+              id: 11,
+              name: '数学',
+              children: [
+                {
+                  id: 111,
+                  name: '积分'
+                }
+              ]
+            },
+            {
+              id: 12,
+              name: '语文',
+              children: [
+                {
+                  id: 121,
+                  name: '诗词'
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   computed: {
@@ -52,7 +82,8 @@ export default {
     })
   },
   components: {
-    MescrollVue
+    MescrollVue,
+    Tree
   },
   created () {},
   beforeRouteEnter (to, from, next) {

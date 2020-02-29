@@ -1,10 +1,10 @@
 <template>
   <div class="whole_container">
-    <span>lalalalala</span>
+    <span @click="showNotice">lalalalala</span>
     <span>{{time | filterExample}}</span>
     <span>{{time | moment('dddd, MMMM Do YYYY')}}</span>
     <span>{{time | moment('YYYY')}}</span>
-    <component-one :sendData="sendData"></component-one>
+    <component-one :value.sync="say"></component-one>
     <component-two :sendData="sendData"></component-two>
     <component-slot>
       匿名传的
@@ -35,12 +35,15 @@ import ComponentOne from '../../components/componentOne'
 import ComponentTwo from '../../components/componentTwo'
 import ComponentSlot from '../../components/componentSlot'
 import FormTest from '../../components/form/index'
+import Notice from '../../components/notice/index'
+import create from '@/utils/create'
 export default {
   name: 'Home',
   data () {
     return {
       time: '2019-11-14 09:56:45',
-      sendData: 'This is father'
+      sendData: 'This is father',
+      say: '123'
     }
   },
   provide: {
@@ -71,7 +74,22 @@ export default {
     // this.$http.jsonp(`http://wapzx.51hejia.com/Apim/api?url=${tempUrl}`).then(res => {
     //   console.log(res)
     // })
-  }
+  }, 
+  watch: {
+    say: (newVal,oldVal) => {
+      console.log(`parent:${newVal}:${oldVal}`)
+    }
+  },
+  methods: {
+    showNotice() {
+      let notice = create(Notice,{
+        title: 'haha',
+        message: 'liuliu',
+        duration: 10000
+      })
+      notice.open()
+    }
+  },
 }
 </script>
 

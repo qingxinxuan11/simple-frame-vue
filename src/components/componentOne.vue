@@ -1,31 +1,27 @@
 <template>
   <div class="whole_container">
-    <div @click="$parent.$emit('myBrotherClick','oneClick')">this is component one</div>
-    <div>{{sendData}} {{passAllData}}</div>
+    <input type="text" :value="value" @input="onInput">
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'ComponentOne',
-  computed: {
-    ...mapGetters('UserInfo', {
-      userInfo: 'getMembInfo'
-    })
-  },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
     }
   },
-  inject: ['passAllData'],
-  props: {
-    sendData: {
-      type: String,
-      default: ''
+  props: ['value'],
+  methods: {
+    onInput(e) {
+      this.$emit('update:value',e.target.value)
     }
-  }
+  },
+  watch: {
+    value: (newVal,oldVal) => {
+      console.log(`son:${newVal}:${oldVal}`)
+    }
+  },
 }
 </script>
 
